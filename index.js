@@ -10,13 +10,8 @@ const SERVER_PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: /http:\/\/localhost:\d+/, // 로컬 개발 허용
-    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors());
+app.options("*", cors());
 
 const mongoClient = new MongoClient(MONGO_URI, {
   serverSelectionTimeoutMS: 10000,
