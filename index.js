@@ -8,6 +8,7 @@ const MONGO_URI =
 const SERVER_PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use(express.json());
 
 const mongoClient = new MongoClient(MONGO_URI, {
   serverSelectionTimeoutMS: 10000,
@@ -61,6 +62,10 @@ app.get("/health", async (req, res) => {
     res.status(500).json({ ok: false, error: error.message });
   }
 });
+
+// Todos API 라우터 마운트 (routers 디렉토리)
+const todosRouter = require("./routers/todos");
+app.use("/api/todos", todosRouter);
 
 // 앱 시작 시 1회 연결 시도(실패해도 서버는 뜨도록)
 ensureMongoConnection()
