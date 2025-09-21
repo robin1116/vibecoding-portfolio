@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm start\""
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,11 @@
   "homepage": "https://github.com/robin1116/vibecoding-portfolio#readme",
   "description": "",
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "vite": "^7.1.6"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.1"

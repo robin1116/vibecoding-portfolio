@@ -1,5 +1,6 @@
 ﻿const express = require("express");
 const { MongoClient } = require("mongodb");
+const cors = require("cors");
 
 // 환경변수 MONGO_URI가 없으면 directConnection과 기본 포트/호스트를 사용
 const MONGO_URI =
@@ -9,6 +10,13 @@ const SERVER_PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: /http:\/\/localhost:\d+/, // 로컬 개발 허용
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 const mongoClient = new MongoClient(MONGO_URI, {
   serverSelectionTimeoutMS: 10000,

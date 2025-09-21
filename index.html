@@ -10,7 +10,23 @@
 </head>
 
 <body>
-    <h1>Welcome to my website</h1>
+    <h1>Todo App</h1>
+    <section>
+        <form id="todo-form">
+            <input id="title" placeholder="할 일을 입력하세요" required />
+            <select id="priority">
+                <option value="1">우선 1</option>
+                <option value="2">우선 2</option>
+                <option value="3" selected>우선 3</option>
+                <option value="4">우선 4</option>
+                <option value="5">우선 5</option>
+            </select>
+            <button type="submit">추가</button>
+        </form>
+    </section>
+    <section>
+        <ul id="todo-list"></ul>
+    </section>
 </body>
 
 </html>

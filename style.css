@@ -1,0 +1,8 @@
+body { font-family: Arial, sans-serif; margin: 24px; }
+h1 { margin-bottom: 16px; }
+form { display: flex; gap: 8px; margin-bottom: 16px; }
+input, select, button { padding: 8px; }
+ul { list-style: none; padding: 0; }
+li { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #eee; }
+button.link { background: none; border: none; color: #1976d2; cursor: pointer; padding: 0; }
+
