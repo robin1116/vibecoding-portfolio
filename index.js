@@ -11,7 +11,6 @@ const SERVER_PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.options("(.*)", cors());
 
 const mongoClient = new MongoClient(MONGO_URI, {
   serverSelectionTimeoutMS: 10000,
