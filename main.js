@@ -1,9 +1,12 @@
-const API_BASE = "http://localhost:3000/api/todos";
+const API_BASE = "/api/todos";
 
 async function fetchTodos() {
     const res = await fetch(API_BASE);
+    if (!res.ok) throw new Error(`목록 실패: ${res.status}`);
+    const ct = res.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) throw new Error('응답이 JSON이 아닙니다');
     const data = await res.json();
-    return data.items || [];
+    return Array.isArray(data.items) ? data.items : [];
 }
 
 async function createTodo(payload) {
