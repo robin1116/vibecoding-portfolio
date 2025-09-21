@@ -26,6 +26,12 @@ async function ensureMongoConnection() {
   }
 }
 
+// Mongoose 연결 초기화
+const { connectMongoose } = require("./model/mongoose");
+connectMongoose()
+  .then(() => console.log("Mongoose connected"))
+  .catch((err) => console.error("Mongoose connection error:", err.message));
+
 app.get("/", async (req, res) => {
   try {
     await ensureMongoConnection();
