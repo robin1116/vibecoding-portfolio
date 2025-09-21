@@ -36,6 +36,18 @@ connectMongoose()
   .then(() => console.log("Mongoose connected"))
   .catch((err) => console.error("Mongoose connection error:", err.message));
 
+function maskMongoUri(uri) {
+  try {
+    const u = new URL(uri);
+    const hasCreds = (u.username && u.username.length) || (u.password && u.password.length);
+    const base = `${u.protocol}//`;
+    const auth = hasCreds ? "*****@" : "";
+    return `${base}${auth}${u.host}${u.pathname}${u.search}`;
+  } catch (e) {
+    return uri;
+  }
+}
+
 app.get("/", async (req, res) => {
   try {
     await ensureMongoConnection();
@@ -52,7 +64,7 @@ app.get("/", async (req, res) => {
     res
       .status(500)
       .send(
-        `<h1>MongoDB 연결 실패</h1><p>URI: ${MONGO_URI.replace(/:\\/\\/.*@/, "://*****@")}</p><pre style="white-space:pre-wrap">${details}</pre>`
+        `<h1>MongoDB 연결 실패</h1><p>URI: ${maskMongoUri(MONGO_URI)}</p><pre style="white-space:pre-wrap">${details}</pre>`
       );
   }
 });
